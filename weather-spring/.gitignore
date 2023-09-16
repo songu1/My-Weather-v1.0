@@ -6,8 +6,8 @@ HELP.md
 !**/src/test/**/build/
 
 ## application properties ##
-application.properties
-application-API-KEY.properties
+#application.properties
+**/src/main/resources/application-API-KEY.properties
 
 ### STS ###
 .apt_generated

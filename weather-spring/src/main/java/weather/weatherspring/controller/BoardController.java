@@ -7,16 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import weather.weatherspring.domain.Member;
-import weather.weatherspring.domain.Record;
-import weather.weatherspring.domain.Review;
-import weather.weatherspring.entity.Search;
+import weather.weatherspring.entity.Member;
+import weather.weatherspring.entity.Record;
+import weather.weatherspring.entity.Review;
+import weather.weatherspring.domain.Search;
 import weather.weatherspring.service.MemberService;
 import weather.weatherspring.service.RecordService;
 import weather.weatherspring.service.ReviewService;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 

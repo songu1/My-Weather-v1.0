@@ -2,8 +2,8 @@ package weather.weatherspring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import weather.weatherspring.domain.Member;
-import weather.weatherspring.entity.MemberForm;
+import weather.weatherspring.entity.Member;
+import weather.weatherspring.domain.MemberForm;
 import weather.weatherspring.repository.MemberRepository;
 
 import java.util.List;
@@ -40,11 +40,11 @@ public class MemberService {
     }
 
     /* id -> 회원 조회 (로그인 시) */
-    public Optional<Member> findOne(Member member) {
-        AtomicReference<Optional<Member>> found= new AtomicReference<>(memberRepository.findById(member.getId()));
-        memberRepository.findById(member.getId())
+    public Optional<Member> findOne(String id,String pw) {
+        AtomicReference<Optional<Member>> found= new AtomicReference<>(memberRepository.findById(id));
+        memberRepository.findById(id)
                 .ifPresent(m -> {
-                    if(!m.getPw().equals(member.getPw())) {
+                    if(!m.getPw().equals(pw)) {
                         found.set(Optional.empty());
                     }else if(m.getAvail().equals("N")){
                         found.set(Optional.empty());
@@ -81,6 +81,14 @@ public class MemberService {
         member.setFvweather(profileForm.getFvweather());
         memberRepository.save(member);
         return Optional.ofNullable(member);
+    }
+
+    /* 사용자 권한 변경 */
+    public Long updateUserAuth(Long uid){
+        Member member = memberRepository.findByUid(uid).get();
+        member.setAvail("N");
+        member = memberRepository.save(member);
+        return member.getUid();
     }
 
 }

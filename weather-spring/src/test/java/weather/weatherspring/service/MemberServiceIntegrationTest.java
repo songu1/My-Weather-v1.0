@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import weather.weatherspring.domain.Member;
-import weather.weatherspring.entity.MemberForm;
+import weather.weatherspring.entity.Member;
 import weather.weatherspring.repository.MemberRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -95,4 +94,24 @@ public class MemberServiceIntegrationTest {
 //        pwForm.setCurPw("Hello1234!");
 //
 //    }
+
+    @Test
+    public void 회원탈퇴_권한변경(){
+        // Givne
+        Member member = new Member();
+        member.setId("Hello@coho.com");
+        member.setPw("Hello12345!");
+        member.setNickname("hi");
+        member.setAvail("Y");
+        Long uid = memberService.join(member);
+
+        // When
+        Long saveUid = memberService.updateUserAuth(uid);
+
+        // Then
+        Member saveMember = memberRepository.findByUid(saveUid).get();
+        assertThat(saveMember.getAvail()).isEqualTo("N");
+
+
+    }
 }

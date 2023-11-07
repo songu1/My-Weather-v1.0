@@ -32,7 +32,7 @@ jobs:
                 - name: DB_HOST
                   value: mariadb
                 - name: DB_PORT
-                  value: ${{ secrets.DB_PORT }}
+                  value: "3306"
                 - name: DB_USERNAME
                   value: ${{ secrets.DB_USERNAME }}
                 - name: DB_PASSWORD
